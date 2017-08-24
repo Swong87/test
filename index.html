@@ -15,69 +15,78 @@
     	"use strict";
 	    var apiKey = "ek5jw2l4w4l862xwyzmwlta09aewyd";
 	    var userAPI = "https://api.twitch.tv/kraken/oauth2/authorize?client_id=" + apiKey + "&redirect_uri=https://swong87.github.io/test/&response_type=id_token&scope=openid user_subscriptions";
-	    // https://api.twitch.tv/kraken/oauth2/authorize?client_id=ek5jw2l4w4l862xwyzmwlta09aewyd&login=swong87&redirect_uri=http://localhost&response_type=id_token&scope=openid%20user_subscriptions
 	    var topVideoURL = "https://api.twitch.tv/kraken/videos/top?client_id=" + apiKey;
 	    var count = 0;
-	 //    $.ajax({
-	 //      	url: topVideoURL,
-	 //      	method: "GET"
-	 //    }).done(function(selected) {
-	 //    	var videoID = selected.videos[count]._id;
-		//     new Twitch.Embed("twitch-embed", {
-		//    		width: 854,
-		//    		height: 480,
-		//    		video: videoID
-		// 	});
+	    $.ajax({
+	      	url: topVideoURL,
+	      	method: "GET"
+	    }).done(function(selected) {
+	    	var videoID = selected.videos[1]._id;
+		    new Twitch.Embed("twitch-embed", {
+		   		width: 854,
+		   		height: 480,
+		   		video: videoID
+			});
+		});
+		// var channelURL = "https://api.twitch.tv/kraken/channels/overwatchcontenders/videos?client_id=" + apiKey;
+		// $.ajax({
+		// 	url: channelURL,
+		// 	method: "GET"
+		// }).done(function(selected) {
+		// 	var viewable = selected.videos[0].viewable;
+		// 	console.log(viewable);
 		// });
 
-		getTopVideo();
+		// getTopVideo();
 
-	    function getUser(){
-	    	$.ajax({
-		      url: userAPI,
-		      method: "GET"
-		    }).done(function(user) {
-		    	var userID = user._id;
-		    	var subscribeURL = "https://api.twitch.tv/kraken/channels/" + channelID + "/subscriptions/" + userID;
-		    	checkSubscription();
-		    	console.log("getUser done!");
-		    });
-	    };
+	 //    function getUser(){
+	 //    	$.ajax({
+		//       url: userAPI,
+		//       crossDomain: true,
+		//       method: "GET"
+		//     }).done(function(user) {
+		//     	var userID = user._id;
+		//     	var subscribeURL = "https://api.twitch.tv/kraken/channels/" + channelID + "/subscriptions/" + userID;
+		//     	checkSubscription();
+		//     	console.log("getUser done!");
+		//     });
+	 //    };
 
-	    function getTopVideo(){
-	    	$.ajax({
-		      	url: topVideoURL,
-		      	method: "GET"
-		    }).done(function(selected) {
-		    	var videoArray = selected.videos;
-		    	var videoLink = selected.videos[count].url;
-		    	var videoID = selected.videos[count]._id;
-		    	var channelID = selected.videos[count].broadcast_id;
-		    	getUser();
-		    	console.log("getTopVideo done!");
-		    });
-	    };
+	 //    function getTopVideo(){
+	 //    	$.ajax({
+		//       	url: topVideoURL,
+		//       	crossDomain: true,
+		//       	method: "GET"
+		//     }).done(function(selected) {
+		//     	var videoArray = selected.videos;
+		//     	var videoLink = selected.videos[count].url;
+		//     	var videoID = selected.videos[count]._id;
+		//     	var channelID = selected.videos[count].broadcast_id;
+		//     	getUser();
+		//     	console.log("getTopVideo done!");
+		//     });
+	 //    };
 
-	    function checkSubscription(){
-	    	$.ajax({
-	    		url: subscribeURL,
-	    		method: "GET"
-	    	}).done(function(response) {
+	 //    function checkSubscription(){
+	 //    	$.ajax({
+	 //    		url: subscribeURL,
+	 //    		method: "GET"
+	 //    	}).done(function(response) {
 	    	
-		    	if(response.error === "Not Found"){
-					console.log("no subscription");
-					getTopVideo();
-					count++;
-				} else {
-					new Twitch.Embed("twitch-embed", {
-				   		width: 854,
-				   		height: 480,
-				   		video: videoID
-					});
-				}
-				console.log("checkSubscription done!");
-	    	});
-	    };
+		//     	if(response.error === "Not Found"){
+		// 			console.log("no subscription");
+		// 			getTopVideo();
+		// 			count++;
+		// 		} else {
+		// 			new Twitch.Embed("twitch-embed", {
+		// 		   		width: 854,
+		// 		   		height: 480,
+		// 		   		video: videoID
+		// 			});
+		// 		}
+		// 		console.log("checkSubscription done!");
+	 //    	});
+	 //    };
 
     </script>
 
